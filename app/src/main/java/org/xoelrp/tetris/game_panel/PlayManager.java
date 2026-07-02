@@ -68,7 +68,9 @@ public class PlayManager {
 
     public void update() {
 
-        currentTetramino.update();
+        if (!KeyHandler.paused) {
+            currentTetramino.update();
+        } 
     }
 
     public void draw(Graphics2D g2) {
@@ -98,6 +100,16 @@ public class PlayManager {
         // Draw currentTetramino
         if (currentTetramino != null) {
             currentTetramino.draw(g2);
+        }
+
+        // Draw paused
+        if (KeyHandler.paused) {
+            g2.setColor(Color.YELLOW);
+            g2.setFont(new Font("Arial", Font.BOLD, 50));
+            g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+            x = left_x + 45;
+            y = top_y + 270;
+            g2.drawString("PAUSED", x, y);
         }
     }
 }
