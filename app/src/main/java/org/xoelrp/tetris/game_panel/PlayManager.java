@@ -24,6 +24,9 @@ public class PlayManager {
     final int TETRAMINO_START_X;
     final int TETRAMINO_START_Y;
 
+    // Other logic
+    public static int dropInterval = 60;  
+
     public PlayManager() {
         // Main Play Area Frame
         left_x = 20;

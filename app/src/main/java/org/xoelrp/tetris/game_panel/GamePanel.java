@@ -24,7 +24,9 @@ public class GamePanel extends JPanel implements Runnable {
         this.setLayout(null);
 
         playManager = new PlayManager();
-    
+        
+        this.addKeyListener(new KeyHandler());
+        this.setFocusable(true);
     }
 
 
