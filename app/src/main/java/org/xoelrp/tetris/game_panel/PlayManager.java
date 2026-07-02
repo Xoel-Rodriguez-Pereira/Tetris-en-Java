@@ -137,6 +137,15 @@ public class PlayManager {
         if (lineCount > 0) {
             lines += lineCount;
             calculateScore(lineCount);
+            // Level up
+            if (lines % 10 == 0) {
+                level += 1;
+                if (dropInterval > 10) {
+                    dropInterval -= 10;
+                } else if (dropInterval > 1) {
+                    dropInterval -= 1;
+                }
+            }
         }
     }
 
@@ -182,9 +191,6 @@ public class PlayManager {
 
             } else {
                 if (!gameOver) {
-                    if (lines % 10 == 0) {
-                        level += 1;
-                    }
                     currentTetramino.update();
                 } 
             }
