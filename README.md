@@ -24,7 +24,7 @@
 
 ## 📖 Descripción
 
-- Es un proyecto de una tarde que utilicé este proyecto para aprender a usar la librería JFrame.
+- Es un proyecto de una tarde que utilicé para aprender a usar la librería JFrame.
 
 ---
 
