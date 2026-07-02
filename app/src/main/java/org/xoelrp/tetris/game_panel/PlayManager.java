@@ -121,7 +121,16 @@ public class PlayManager {
 
                     // Count line
                     lineCount++;
-
+                    lines++;
+                    // Level up
+                    if (lines % 10 == 0) {
+                        level += 1;
+                        if (dropInterval > 10) {
+                            dropInterval -= 10;
+                        } else if (dropInterval > 1) {
+                            dropInterval -= 1;
+                        }
+                    }
                     // Move all the static block above the deleted row
                     for (Block b : staticBlocks) {
                         if (b.y < y) {
@@ -136,17 +145,7 @@ public class PlayManager {
         }
         if (lineCount > 0) {
             GamePanel.soundEffect.play(2, false);
-            lines += lineCount;
             calculateScore(lineCount);
-            // Level up
-            if (lines % 10 == 0) {
-                level += 1;
-                if (dropInterval > 10) {
-                    dropInterval -= 10;
-                } else if (dropInterval > 1) {
-                    dropInterval -= 1;
-                }
-            }
         }
     }
 
@@ -194,7 +193,7 @@ public class PlayManager {
             } else {
                 if (!gameOver) {
                     currentTetramino.update();
-                } 
+                }
             }
         } 
     }

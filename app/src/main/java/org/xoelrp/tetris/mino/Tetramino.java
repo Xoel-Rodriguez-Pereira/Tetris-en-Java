@@ -75,6 +75,7 @@ public class Tetramino {
         for (Block b : block) {
             if (b.x == PlayManager.left_x) {
                 leftColision = true;
+                KeyHandler.leftKeyPress = false;
             }
         }
 
@@ -82,6 +83,7 @@ public class Tetramino {
         for (Block b : block) {
             if (b.x + Block.SIZE == PlayManager.right_x) {
                 rightColision = true;
+                KeyHandler.rightKeyPress = false;
             }
         }
 
