@@ -7,7 +7,7 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 
 import org.xoelrp.tetris.mino.Block;
-import org.xoelrp.tetris.mino.OrangeRicky;
+import org.xoelrp.tetris.mino.Teewee;
 import org.xoelrp.tetris.mino.Tetramino;
 
 public class PlayManager {
@@ -39,7 +39,7 @@ public class PlayManager {
         TETRAMINO_START_Y = top_y + Block.SIZE;
 
         // Set start tetramino
-        currentTetramino = new OrangeRicky();
+        currentTetramino = new Teewee();
         currentTetramino.setXY(TETRAMINO_START_X, TETRAMINO_START_Y);
     }
 
