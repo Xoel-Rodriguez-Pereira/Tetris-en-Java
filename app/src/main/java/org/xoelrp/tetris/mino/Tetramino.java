@@ -14,6 +14,8 @@ public class Tetramino {
     public int autoDropCounter = 0;
     public int direction = 1;
 
+    boolean leftColision, rightColision, bottomColision;
+
     public void create(Color color) {
         block[0] = new Block(color);
         block[1] = new Block(color);
@@ -40,6 +42,36 @@ public class Tetramino {
     public void getDirection2() {};
     public void getDirection3() {};
     public void getDirection4() {};
+    public void checkMovementColision() {
+
+        leftColision = false;
+        rightColision = false;
+        bottomColision = false;
+
+        // Check frame colision
+        // Left
+        for (Block b : block) {
+            if (b.x == PlayManager.left_x) {
+                leftColision = true;
+            }
+        }
+
+        // Right
+        for (Block b : block) {
+            if (b.x + Block.SIZE == PlayManager.right_x) {
+                rightColision = true;
+            }
+        }
+
+        // Bottom
+        for (Block b : block) {
+            if (b.y + Block.SIZE == PlayManager.bottom_y) {
+                bottomColision = true;
+            }
+        }
+    };
+    public void checkRotationColision() {};
+
 
     public void update() {
 
@@ -53,27 +85,36 @@ public class Tetramino {
             }
             KeyHandler.upKeyPress = false;
         }
+
+        checkMovementColision();
+
         if (KeyHandler.downKeyPress) {
-            block[0].y += Block.SIZE;
-            block[1].y += Block.SIZE;
-            block[2].y += Block.SIZE;
-            block[3].y += Block.SIZE;
-            autoDropCounter = 0;
-            KeyHandler.downKeyPress = false;
+            if (!bottomColision) {
+                block[0].y += Block.SIZE;
+                block[1].y += Block.SIZE;
+                block[2].y += Block.SIZE;
+                block[3].y += Block.SIZE;
+                autoDropCounter = 0;
+                KeyHandler.downKeyPress = false;
+            }
         }
         if (KeyHandler.leftKeyPress) {
-            block[0].x -= Block.SIZE;
-            block[1].x -= Block.SIZE;
-            block[2].x -= Block.SIZE;
-            block[3].x -= Block.SIZE;
-            KeyHandler.leftKeyPress = false;
+            if (!leftColision) {
+                block[0].x -= Block.SIZE;
+                block[1].x -= Block.SIZE;
+                block[2].x -= Block.SIZE;
+                block[3].x -= Block.SIZE;
+                KeyHandler.leftKeyPress = false;
+            }
         }
         if (KeyHandler.rightKeyPress) {
-            block[0].x += Block.SIZE;
-            block[1].x += Block.SIZE;
-            block[2].x += Block.SIZE;
-            block[3].x += Block.SIZE;
-            KeyHandler.rightKeyPress = false;
+            if (!rightColision) {
+                block[0].x += Block.SIZE;
+                block[1].x += Block.SIZE;
+                block[2].x += Block.SIZE;
+                block[3].x += Block.SIZE;
+                KeyHandler.rightKeyPress = false;
+            }
         }
 
         autoDropCounter++;
