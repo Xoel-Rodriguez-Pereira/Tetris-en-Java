@@ -3,6 +3,7 @@ package org.xoelrp.tetris.mino;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
+import org.xoelrp.tetris.game_panel.KeyHandler;
 import org.xoelrp.tetris.game_panel.PlayManager;
 
 public class Tetramino {
@@ -24,7 +25,35 @@ public class Tetramino {
     }
     public void setXY(int x, int y) {}
     public void updateXY(int direction) {}
+
     public void update() {
+
+        if (KeyHandler.upKeyPress) {
+
+        }
+        if (KeyHandler.downKeyPress) {
+            block[0].y += Block.SIZE;
+            block[1].y += Block.SIZE;
+            block[2].y += Block.SIZE;
+            block[3].y += Block.SIZE;
+            autoDropCounter = 0;
+            KeyHandler.downKeyPress = false;
+        }
+        if (KeyHandler.leftKeyPress) {
+            block[0].x -= Block.SIZE;
+            block[1].x -= Block.SIZE;
+            block[2].x -= Block.SIZE;
+            block[3].x -= Block.SIZE;
+            KeyHandler.leftKeyPress = false;
+        }
+        if (KeyHandler.rightKeyPress) {
+            block[0].x += Block.SIZE;
+            block[1].x += Block.SIZE;
+            block[2].x += Block.SIZE;
+            block[3].x += Block.SIZE;
+            KeyHandler.rightKeyPress = false;
+        }
+
         autoDropCounter++;
         if (autoDropCounter == PlayManager.dropInterval) {
             block[0].y += Block.SIZE;
