@@ -3,6 +3,7 @@ package org.xoelrp.tetris.game_panel;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
@@ -13,6 +14,8 @@ public class GamePanel extends JPanel implements Runnable {
     final private Integer objetiveFPS = 60;
     Thread gameThread;
 
+    PlayManager playManager;
+
     public GamePanel() {
 
         //GamePanel settings
@@ -20,6 +23,8 @@ public class GamePanel extends JPanel implements Runnable {
         this.setBackground(Color.BLACK);
         this.setLayout(null);
 
+        playManager = new PlayManager();
+    
     }
 
 
@@ -30,14 +35,36 @@ public class GamePanel extends JPanel implements Runnable {
 
     @Override
     public void run() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        // GameLoop
+        double drawInterval = 1000000000 / objetiveFPS; // En milisegundos
+        double delta = 0;
+        long lastTime = System.nanoTime();
+        long currentTime;
+
+        while (gameThread != null) {
+
+            currentTime = System.nanoTime();
+
+            delta += (currentTime - lastTime) / drawInterval;
+            lastTime = currentTime;
+
+            if (delta >= 1) {
+                update();
+                repaint(); // Llama al metodo paintComponent()
+                delta--;
+            }
+        }
     }
 
     public void update() {
 
+        playManager.update();
     }
 
     public void paintComponent(Graphics g) {
         super.paint(g);
+
+        Graphics2D g2 = (Graphics2D)g;
+        playManager.draw(g2);
     }
 }
