@@ -8,6 +8,7 @@ public class Hero extends Tetramino {
         create(Color.CYAN);
     }
 
+    @Override
     public void setXY(int x, int y) {
         //     
         // 1 0 2 3

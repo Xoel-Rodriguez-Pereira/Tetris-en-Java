@@ -8,6 +8,7 @@ public class ClevelandZ extends Tetramino {
         create(Color.GREEN);
     }
 
+    @Override
     public void setXY(int x, int y) {
         // 3 2   
         //   0 1

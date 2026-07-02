@@ -8,6 +8,7 @@ public class Smashboy extends Tetramino {
         create(Color.YELLOW);
     }
 
+    @Override
     public void setXY(int x, int y) {
         // 2 3   
         // 1 0 

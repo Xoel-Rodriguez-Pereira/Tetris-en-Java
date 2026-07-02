@@ -45,12 +45,11 @@ public class Tetramino {
 
         if (KeyHandler.upKeyPress) {
             switch (direction) {
-                case 1: getDirection2(); break;
-                case 2: getDirection3(); break;
-                case 3: getDirection4(); break;
-                case 4: getDirection1(); break;
-                default:
-                    throw new AssertionError();
+                case 1 -> getDirection2();
+                case 2 -> getDirection3();
+                case 3 -> getDirection4();
+                case 4 -> getDirection1();
+                default -> throw new AssertionError();
             }
             KeyHandler.upKeyPress = false;
         }

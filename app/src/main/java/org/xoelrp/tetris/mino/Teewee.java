@@ -8,6 +8,7 @@ public class Teewee extends Tetramino {
         create(Color.MAGENTA);
     }
 
+    @Override
     public void setXY(int x, int y) {
         //   3  
         // 1 0 2

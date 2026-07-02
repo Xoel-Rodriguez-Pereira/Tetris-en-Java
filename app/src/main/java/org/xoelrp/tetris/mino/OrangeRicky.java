@@ -8,6 +8,7 @@ public class OrangeRicky extends Tetramino {
         create(Color.ORANGE);
     }
 
+    @Override
     public void setXY(int x, int y) {
         //     3
         // 1 0 2
