@@ -2,7 +2,9 @@ package org.xoelrp.tetris.game_panel;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 
 public class PlayManager {
     // Main Play Area
@@ -36,5 +38,8 @@ public class PlayManager {
         int x = right_x + 40;
         int y = bottom_y - 180;
         g2.drawRect(x, y, 180, 180);
+        g2.setFont(new Font("Arial", Font.PLAIN, 30));
+        g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        g2.drawString("NEXT", x+50, y+40);
     }
 }
