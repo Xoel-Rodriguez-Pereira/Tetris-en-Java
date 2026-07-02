@@ -40,6 +40,11 @@ public class PlayManager {
     public static int dropInterval = 60;  
     boolean gameOver;
 
+    // Effects
+    boolean isEffectOn = false;
+    int effectCounter;
+    ArrayList<Integer> effectsY = new ArrayList<>();
+
     public PlayManager() {
         // Main Play Area Frame
         left_x = 20;
@@ -96,6 +101,11 @@ public class PlayManager {
 
             if (x == right_x) {
                 if (blockCount == 10) {
+
+                    // Delete effect
+                    isEffectOn = true;
+                    effectsY.add(y);
+
                     for (int i = staticBlocks.size() -1; i > -1; i--) {
                         if (staticBlocks.get(i).y == y) {
                             staticBlocks.remove(i);
@@ -192,6 +202,25 @@ public class PlayManager {
             b.Draw(g2);
         }
 
+        // Draw effect
+        if (isEffectOn) {
+            effectCounter++;
+            for (int blockY : effectsY) {
+                g2.setColor(Color.RED);
+                g2.fillRect(left_x, blockY, WIDTH, Block.SIZE);
+
+                if (effectCounter >= 5) {
+                g2.setColor(Color.WHITE);
+                g2.fillRect(left_x, blockY, WIDTH, Block.SIZE);
+            }
+            }
+            if (effectCounter == 7) {
+                effectCounter = 0;
+                isEffectOn = false;
+                effectsY.clear();
+            }
+        }
+        
         // Draw paused
         if (KeyHandler.paused && !gameOver) {
             g2.setColor(Color.YELLOW);
