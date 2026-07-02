@@ -12,6 +12,7 @@ public class Tetramino {
     public Block tempBlock[] = new Block[4]; 
 
     public int autoDropCounter = 0;
+    public int direction = 1;
 
     public void create(Color color) {
         block[0] = new Block(color);
@@ -24,12 +25,34 @@ public class Tetramino {
         tempBlock[3] = new Block(color);
     }
     public void setXY(int x, int y) {}
-    public void updateXY(int direction) {}
+    public void updateXY(int direction) {
+        this.direction = direction;
+        block[0].x = tempBlock[0].x;
+        block[0].y = tempBlock[0].y;
+        block[1].x = tempBlock[1].x;
+        block[1].y = tempBlock[1].y;
+        block[2].x = tempBlock[2].x;
+        block[2].y = tempBlock[2].y;
+        block[3].x = tempBlock[3].x;
+        block[3].y = tempBlock[3].y;
+    }
+    public void getDirection1() {};
+    public void getDirection2() {};
+    public void getDirection3() {};
+    public void getDirection4() {};
 
     public void update() {
 
         if (KeyHandler.upKeyPress) {
-
+            switch (direction) {
+                case 1: getDirection2(); break;
+                case 2: getDirection3(); break;
+                case 3: getDirection4(); break;
+                case 4: getDirection1(); break;
+                default:
+                    throw new AssertionError();
+            }
+            KeyHandler.upKeyPress = false;
         }
         if (KeyHandler.downKeyPress) {
             block[0].y += Block.SIZE;
