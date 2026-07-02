@@ -41,5 +41,14 @@ public class PlayManager {
         g2.setFont(new Font("Arial", Font.PLAIN, 30));
         g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         g2.drawString("NEXT", x+50, y+40);
+
+        //Draw score area
+        x = right_x + 40;
+        y = top_y;
+        g2.drawRect(x, y, 180, 380);
+        g2.setFont(new Font("Arial", Font.PLAIN, 20));
+        g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        g2.drawString("Score:", x+15, y+50);
+        g2.drawString("Level:", x+15, y+100);
     }
 }
