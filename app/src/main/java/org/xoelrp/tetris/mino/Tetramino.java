@@ -14,8 +14,10 @@ public class Tetramino {
     public int autoDropCounter = 0;
     public int direction = 1;
 
-    boolean leftColision, rightColision, bottomColision;
-    public boolean active = true;   
+    boolean leftColision, rightColision, bottomColision, deactivating;
+    public boolean active = true;
+    int deativationCounter = 0;
+
 
     public void create(Color color) {
         block[0] = new Block(color);
@@ -47,11 +49,23 @@ public class Tetramino {
     public void getDirection2() {};
     public void getDirection3() {};
     public void getDirection4() {};
+    public void deactivate() {
+        deativationCounter++;
+        if (deativationCounter == 45) {
+            checkMovementColision();
+            if (bottomColision) {
+                active = false;
+            }
+            deativationCounter = 0;
+        }
+    }
     public void checkMovementColision() {
 
         leftColision = false;
         rightColision = false;
         bottomColision = false;
+
+        checkStatickBlockColision();
 
         // Check frame colision
         // Left
@@ -81,6 +95,8 @@ public class Tetramino {
         rightColision = false;
         bottomColision = false;
 
+        checkStatickBlockColision();
+
         // Check frame colision
         // Left
         for (Block b : tempBlock) {
@@ -104,8 +120,35 @@ public class Tetramino {
         }
     };
 
+    public void checkStatickBlockColision() {
+        for (Block staticBlock : PlayManager.staticBlocks) {
+
+            int targetX = staticBlock.x;
+            int targetY = staticBlock.y;
+
+            for (Block b : block) {
+                // Bottom
+                if(b.y + Block.SIZE == targetY && b.x == targetX) {
+                    bottomColision = true;
+                }
+                // Left
+                if(b.x - Block.SIZE == targetX && b.y == targetY) {
+                    leftColision = true;
+                }
+                // Right
+                if(b.x + Block.SIZE == targetX && b.y == targetY) {
+                    rightColision = true;
+                }
+            }
+        }
+     
+    }
 
     public void update() {
+
+        if (deactivating) {
+            deactivate();
+        }
 
         if (KeyHandler.upKeyPress) {
             switch (direction) {
@@ -150,7 +193,7 @@ public class Tetramino {
         }
 
         if (bottomColision) {
-            active = false;
+            deactivating = true;
         } else {
             autoDropCounter++;
             if (autoDropCounter == PlayManager.dropInterval) {
