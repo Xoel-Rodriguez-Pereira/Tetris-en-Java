@@ -29,8 +29,8 @@ public class GamePanel extends JPanel implements Runnable {
 
 
     public void launchGame() {
-        gameThread = new Thread();
-        gameThread.start(); // Ejecuata automaticamente la funcion run() 
+        gameThread = new Thread(this);
+        gameThread.start(); // Ejecuta run() del GamePanel
     }
 
     @Override
@@ -62,9 +62,8 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void paintComponent(Graphics g) {
-        super.paint(g);
-
-        Graphics2D g2 = (Graphics2D)g;
+        super.paintComponent(g);
+        Graphics2D g2 = (Graphics2D) g;
         playManager.draw(g2);
     }
 }
