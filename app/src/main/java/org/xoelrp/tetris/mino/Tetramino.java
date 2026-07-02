@@ -15,6 +15,7 @@ public class Tetramino {
     public int direction = 1;
 
     boolean leftColision, rightColision, bottomColision;
+    public boolean active = true;   
 
     public void create(Color color) {
         block[0] = new Block(color);
@@ -148,14 +149,19 @@ public class Tetramino {
             }
         }
 
-        autoDropCounter++;
-        if (autoDropCounter == PlayManager.dropInterval) {
-            block[0].y += Block.SIZE;
-            block[1].y += Block.SIZE;
-            block[2].y += Block.SIZE;
-            block[3].y += Block.SIZE;
-            autoDropCounter = 0;
+        if (bottomColision) {
+            active = false;
+        } else {
+            autoDropCounter++;
+            if (autoDropCounter == PlayManager.dropInterval) {
+                block[0].y += Block.SIZE;
+                block[1].y += Block.SIZE;
+                block[2].y += Block.SIZE;
+                block[3].y += Block.SIZE;
+                autoDropCounter = 0;
+            }
         }
+        
     }
     public void draw(Graphics2D g2) {
 
