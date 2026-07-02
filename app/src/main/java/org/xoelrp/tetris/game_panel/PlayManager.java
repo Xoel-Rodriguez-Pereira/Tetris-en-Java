@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.util.ArrayList;
 import java.util.Random;
 
 import org.xoelrp.tetris.mino.Block;
@@ -30,6 +31,10 @@ public class PlayManager {
     Tetramino currentTetramino;
     final int TETRAMINO_START_X;
     final int TETRAMINO_START_Y;
+    Tetramino nextTetramino;
+    final int NEXT_TETRAMINO_X;
+    final int NEXT_TETRAMINO_Y;
+    public static ArrayList<Block> staticBlocks = new ArrayList<>();
 
     // Other logic
     public static int dropInterval = 60;  
@@ -45,9 +50,14 @@ public class PlayManager {
         TETRAMINO_START_X = left_x + (WIDTH/2) - Block.SIZE;
         TETRAMINO_START_Y = top_y + Block.SIZE;
 
+        NEXT_TETRAMINO_X = right_x + 10 + 3*Block.SIZE;
+        NEXT_TETRAMINO_Y = bottom_y - 3*Block.SIZE;
+
         // Set start tetramino
         currentTetramino = pickTetramino();
         currentTetramino.setXY(TETRAMINO_START_X, TETRAMINO_START_Y);
+        nextTetramino = pickTetramino();
+        nextTetramino.setXY(NEXT_TETRAMINO_X, NEXT_TETRAMINO_Y);
     }
 
     private Tetramino pickTetramino() {
@@ -69,7 +79,22 @@ public class PlayManager {
     public void update() {
 
         if (!KeyHandler.paused) {
-            currentTetramino.update();
+            if (!currentTetramino.active) {
+                // Store current tetramino as static blocks
+                staticBlocks.add(currentTetramino.block[0]);
+                staticBlocks.add(currentTetramino.block[1]);
+                staticBlocks.add(currentTetramino.block[2]);
+                staticBlocks.add(currentTetramino.block[3]);
+
+                // Select next tetramino
+                currentTetramino = nextTetramino;
+                currentTetramino.setXY(TETRAMINO_START_X, TETRAMINO_START_Y);
+                nextTetramino = pickTetramino();
+                nextTetramino.setXY(NEXT_TETRAMINO_X, NEXT_TETRAMINO_Y);
+
+            } else {
+                currentTetramino.update();
+            }
         } 
     }
 
@@ -80,7 +105,7 @@ public class PlayManager {
         g2.setStroke(new BasicStroke((float)strokeWidth));
         g2.drawRect(left_x - strokeWidth, top_y - strokeWidth, WIDTH + 2 * strokeWidth, HEIGHT + 2 * strokeWidth);
 
-        //Draw new tetramino area
+        //Draw next tetramino area
         int x = right_x + 40;
         int y = bottom_y - 180;
         g2.drawRect(x, y, 180, 180);
@@ -100,6 +125,16 @@ public class PlayManager {
         // Draw currentTetramino
         if (currentTetramino != null) {
             currentTetramino.draw(g2);
+        }
+
+        // Draw nextTetramino
+        if (nextTetramino != null) {
+            nextTetramino.draw(g2);
+        }
+
+        // Draw static blocks
+        for (Block b : staticBlocks) {
+            b.Draw(g2);
         }
 
         // Draw paused
