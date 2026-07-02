@@ -39,6 +39,7 @@ public class PlayManager {
     // Other logic
     public static int dropInterval = 60;  
     boolean gameOver;
+    private int score, level, lines;
 
     // Effects
     boolean isEffectOn = false;
@@ -66,6 +67,11 @@ public class PlayManager {
         nextTetramino.setXY(NEXT_TETRAMINO_X, NEXT_TETRAMINO_Y);
 
         gameOver = false;
+
+        // Starting scores
+        score = 0;
+        level = 0;
+        lines = 0;
     }
 
     private Tetramino pickTetramino() {
@@ -88,6 +94,7 @@ public class PlayManager {
         int x = left_x;
         int y = top_y;
         int blockCount = 0;
+        int lineCount = 0;
 
         while (x < right_x && y < bottom_y) {
             
@@ -111,6 +118,10 @@ public class PlayManager {
                             staticBlocks.remove(i);
                         }
                     }
+
+                    // Count line
+                    lineCount++;
+
                     // Move all the static block above the deleted row
                     for (Block b : staticBlocks) {
                         if (b.y < y) {
@@ -122,6 +133,20 @@ public class PlayManager {
                 y += Block.SIZE;
                 blockCount = 0;
             }
+        }
+        if (lineCount > 0) {
+            lines += lineCount;
+            calculateScore(lineCount);
+        }
+    }
+
+    public void calculateScore(int lines) {
+        switch (lines) {
+            case 1 -> score += 40 * (level + 1);
+            case 2 -> score += 100 * (level + 1);
+            case 3 -> score += 300 * (level + 1);
+            case 4 -> score += 1200 * (level + 1);
+            default -> throw new AssertionError();
         }
     }
 
@@ -157,6 +182,9 @@ public class PlayManager {
 
             } else {
                 if (!gameOver) {
+                    if (lines % 10 == 0) {
+                        level += 1;
+                    }
                     currentTetramino.update();
                 } 
             }
@@ -184,8 +212,9 @@ public class PlayManager {
         g2.drawRect(x, y, 180, 380);
         g2.setFont(new Font("Arial", Font.PLAIN, 20));
         g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        g2.drawString("Score:", x+15, y+50);
-        g2.drawString("Level:", x+15, y+100);
+        g2.drawString("Score: " + score, x+15, y+50);
+        g2.drawString("Lines: " + lines, x+15, y+100);
+        g2.drawString("Level: " + level, x+15, y+150);
 
         // Draw currentTetramino
         if (currentTetramino != null) {
