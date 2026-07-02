@@ -79,6 +79,10 @@ cd nombre-del-directorio/
 y ejecuta en terminal:
 
 ```bash
+gradle fatJar
+```
+
+```bash
 java -jar /app/build/libs/app-1.0-SNAPSHOT.jar
 ```
 
