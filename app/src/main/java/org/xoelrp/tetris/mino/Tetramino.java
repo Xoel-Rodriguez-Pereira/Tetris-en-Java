@@ -28,15 +28,19 @@ public class Tetramino {
     }
     public void setXY(int x, int y) {}
     public void updateXY(int direction) {
-        this.direction = direction;
-        block[0].x = tempBlock[0].x;
-        block[0].y = tempBlock[0].y;
-        block[1].x = tempBlock[1].x;
-        block[1].y = tempBlock[1].y;
-        block[2].x = tempBlock[2].x;
-        block[2].y = tempBlock[2].y;
-        block[3].x = tempBlock[3].x;
-        block[3].y = tempBlock[3].y;
+        checkRotationColision();
+
+        if (!leftColision && !rightColision && !bottomColision) {
+            this.direction = direction;
+            block[0].x = tempBlock[0].x;
+            block[0].y = tempBlock[0].y;
+            block[1].x = tempBlock[1].x;
+            block[1].y = tempBlock[1].y;
+            block[2].x = tempBlock[2].x;
+            block[2].y = tempBlock[2].y;
+            block[3].x = tempBlock[3].x;
+            block[3].y = tempBlock[3].y;
+        }
     }
     public void getDirection1() {};
     public void getDirection2() {};
@@ -70,7 +74,34 @@ public class Tetramino {
             }
         }
     };
-    public void checkRotationColision() {};
+    public void checkRotationColision() {
+
+        leftColision = false;
+        rightColision = false;
+        bottomColision = false;
+
+        // Check frame colision
+        // Left
+        for (Block b : tempBlock) {
+            if (b.x < PlayManager.left_x) {
+                leftColision = true;
+            }
+        }
+
+        // Right
+        for (Block b : tempBlock) {
+            if (b.x + Block.SIZE > PlayManager.right_x) {
+                rightColision = true;
+            }
+        }
+
+        // Bottom
+        for (Block b : tempBlock) {
+            if (b.y + Block.SIZE > PlayManager.bottom_y) {
+                bottomColision = true;
+            }
+        }
+    };
 
 
     public void update() {
