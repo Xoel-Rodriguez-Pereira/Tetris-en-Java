@@ -13,6 +13,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     final private Integer objetiveFPS = 60;
     Thread gameThread;
+    private volatile boolean isRunning = false;
 
     PlayManager playManager;
 
@@ -31,6 +32,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 
     public void launchGame() {
+        isRunning = true;
         gameThread = new Thread(this);
         gameThread.start(); // Ejecuta run() del GamePanel
     }
@@ -43,7 +45,7 @@ public class GamePanel extends JPanel implements Runnable {
         long lastTime = System.nanoTime();
         long currentTime;
 
-        while (gameThread != null) {
+        while (isRunning) {
 
             currentTime = System.nanoTime();
 

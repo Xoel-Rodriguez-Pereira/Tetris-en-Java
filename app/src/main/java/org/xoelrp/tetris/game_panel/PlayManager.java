@@ -38,6 +38,7 @@ public class PlayManager {
 
     // Other logic
     public static int dropInterval = 60;  
+    boolean gameOver;
 
     public PlayManager() {
         // Main Play Area Frame
@@ -58,6 +59,8 @@ public class PlayManager {
         currentTetramino.setXY(TETRAMINO_START_X, TETRAMINO_START_Y);
         nextTetramino = pickTetramino();
         nextTetramino.setXY(NEXT_TETRAMINO_X, NEXT_TETRAMINO_Y);
+
+        gameOver = false;
     }
 
     private Tetramino pickTetramino() {
@@ -112,10 +115,18 @@ public class PlayManager {
         }
     }
 
-    public void update() {
+    public void checkGameOver() {
+        for (Block b : staticBlocks) {
+            if (b.x == TETRAMINO_START_X && b.y == TETRAMINO_START_Y) {
+                gameOver = true;
+            }
+        }
+    }
 
+    public void update() {
+        
         if (!KeyHandler.paused) {
-            if (!currentTetramino.active) {
+            if (!currentTetramino.active && !gameOver) {
                 // Store current tetramino as static blocks
                 staticBlocks.add(currentTetramino.block[0]);
                 staticBlocks.add(currentTetramino.block[1]);
@@ -128,11 +139,16 @@ public class PlayManager {
                 nextTetramino = pickTetramino();
                 nextTetramino.setXY(NEXT_TETRAMINO_X, NEXT_TETRAMINO_Y);
 
+                // Check game over
+                checkGameOver();
+
                 // When a tetramino becames inactive, check if the row can be deleted
                 checkDelete();
 
             } else {
-                currentTetramino.update();
+                if (!gameOver) {
+                    currentTetramino.update();
+                } 
             }
         } 
     }
@@ -177,13 +193,29 @@ public class PlayManager {
         }
 
         // Draw paused
-        if (KeyHandler.paused) {
+        if (KeyHandler.paused && !gameOver) {
             g2.setColor(Color.YELLOW);
             g2.setFont(new Font("Arial", Font.BOLD, 50));
             g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
             x = left_x + 45;
             y = top_y + 270;
             g2.drawString("PAUSED", x, y);
+        }
+
+        // Draw gameOver
+        if (gameOver) {
+            g2.setFont(new Font("NotoSANS", Font.BOLD | Font.ITALIC, 70));
+            g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+            x = left_x + 45;
+            y = top_y + 300;
+            
+            // Dibujar sombra negra
+            g2.setColor(Color.BLACK);
+            g2.drawString("GAME OVER", x + 4, y + 4);
+            
+            // Dibujar texto rojo
+            g2.setColor(Color.RED);
+            g2.drawString("GAME OVER", x, y);
         }
     }
 }
