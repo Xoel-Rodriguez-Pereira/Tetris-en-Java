@@ -31,5 +31,10 @@ public class PlayManager {
         g2.setColor(Color.WHITE);
         g2.setStroke(new BasicStroke((float)strokeWidth));
         g2.drawRect(left_x - strokeWidth, top_y, WHIDTH + 2 * strokeWidth, HEIGHT + 2 * strokeWidth);
+
+        //Draw new tetramino area
+        int x = right_x + 40;
+        int y = bottom_y - 180;
+        g2.drawRect(x, y, 180, 180);
     }
 }
