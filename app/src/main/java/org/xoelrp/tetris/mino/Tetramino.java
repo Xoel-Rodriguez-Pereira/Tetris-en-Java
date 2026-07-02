@@ -24,7 +24,11 @@ public class Tetramino {
 
     }
     public void draw(Graphics2D g2) {
-        
+        g2.setColor(block[0].color);
+        g2.fillRect(block[0].x, block[0].y, Block.SIZE, Block.SIZE);
+        g2.fillRect(block[1].x, block[1].y, Block.SIZE, Block.SIZE);
+        g2.fillRect(block[2].x, block[2].y, Block.SIZE, Block.SIZE);
+        g2.fillRect(block[3].x, block[3].y, Block.SIZE, Block.SIZE);
     }
 
 }
