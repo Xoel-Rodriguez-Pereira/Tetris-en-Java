@@ -13,7 +13,7 @@ public class Smashboy extends Tetramino {
         // 2 3   
         // 1 0 
         //
-        block[0].x = x;
+        block[0].x = x + Block.SIZE;
         block[0].y = y;
         block[1].x = block[0].x - Block.SIZE;
         block[1].y = block[0].y;

@@ -5,8 +5,15 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.util.Random;
 
 import org.xoelrp.tetris.mino.Block;
+import org.xoelrp.tetris.mino.BlueRicky;
+import org.xoelrp.tetris.mino.ClevelandZ;
+import org.xoelrp.tetris.mino.Hero;
+import org.xoelrp.tetris.mino.OrangeRicky;
+import org.xoelrp.tetris.mino.RhodeIlandZ;
+import org.xoelrp.tetris.mino.Smashboy;
 import org.xoelrp.tetris.mino.Teewee;
 import org.xoelrp.tetris.mino.Tetramino;
 
@@ -39,8 +46,24 @@ public class PlayManager {
         TETRAMINO_START_Y = top_y + Block.SIZE;
 
         // Set start tetramino
-        currentTetramino = new Teewee();
+        currentTetramino = pickTetramino();
         currentTetramino.setXY(TETRAMINO_START_X, TETRAMINO_START_Y);
+    }
+
+    private Tetramino pickTetramino() {
+        Tetramino tetramino = null;
+        int i = new Random().nextInt(7);
+        switch (i) {
+            case 0 -> tetramino = new BlueRicky();
+            case 1 -> tetramino = new OrangeRicky();
+            case 2 -> tetramino = new ClevelandZ();
+            case 3 -> tetramino = new RhodeIlandZ();
+            case 4 -> tetramino = new Hero();
+            case 5 -> tetramino = new Smashboy();
+            case 6 -> tetramino = new Teewee();
+            default -> throw new AssertionError();
+        }
+        return tetramino;
     }
 
     public void update() {
