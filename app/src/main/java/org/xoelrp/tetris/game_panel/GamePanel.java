@@ -2,6 +2,7 @@ package org.xoelrp.tetris.game_panel;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
@@ -21,10 +22,22 @@ public class GamePanel extends JPanel implements Runnable {
 
     }
 
+
+    public void launchGame() {
+        gameThread = new Thread();
+        gameThread.start(); // Ejecuata automaticamente la funcion run() 
+    }
+
     @Override
     public void run() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    
+    public void update() {
+
+    }
+
+    public void paintComponent(Graphics g) {
+        super.paint(g);
+    }
 }
