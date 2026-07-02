@@ -3,6 +3,7 @@ package org.xoelrp.tetris.mino;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
+import org.xoelrp.tetris.game_panel.GamePanel;
 import org.xoelrp.tetris.game_panel.KeyHandler;
 import org.xoelrp.tetris.game_panel.PlayManager;
 
@@ -160,6 +161,7 @@ public class Tetramino {
                 case 4 -> getDirection1();
                 default -> throw new AssertionError();
             }
+            GamePanel.soundEffect.play(1, false);
             KeyHandler.upKeyPress = false;
         }
 
@@ -195,6 +197,9 @@ public class Tetramino {
         }
 
         if (bottomColision) {
+            if (!deactivating) {
+                GamePanel.soundEffect.play(0, false);
+            }
             deactivating = true;
         } else {
             autoDropCounter++;

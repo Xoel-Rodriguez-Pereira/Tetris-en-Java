@@ -17,6 +17,9 @@ public class GamePanel extends JPanel implements Runnable {
 
     PlayManager playManager;
 
+    public static Sound music = new Sound();
+    public static Sound soundEffect = new Sound();
+
     public GamePanel() {
 
         //GamePanel settings

@@ -135,6 +135,7 @@ public class PlayManager {
             }
         }
         if (lineCount > 0) {
+            GamePanel.soundEffect.play(2, false);
             lines += lineCount;
             calculateScore(lineCount);
             // Level up
@@ -163,6 +164,7 @@ public class PlayManager {
         for (Block b : staticBlocks) {
             if (b.x == TETRAMINO_START_X && b.y == TETRAMINO_START_Y) {
                 gameOver = true;
+                GamePanel.soundEffect.play(3, false);
             }
         }
     }
