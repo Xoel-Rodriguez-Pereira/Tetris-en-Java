@@ -76,6 +76,42 @@ public class PlayManager {
         return tetramino;
     }
 
+    public void checkDelete() {
+        int x = left_x;
+        int y = top_y;
+        int blockCount = 0;
+
+        while (x < right_x && y < bottom_y) {
+            
+            for (Block staticB : staticBlocks) {
+                if (staticB.x == x && staticB.y == y) {
+                    blockCount++;
+                }
+            }
+
+            x += Block.SIZE;
+
+            if (x == right_x) {
+                if (blockCount == 10) {
+                    for (int i = staticBlocks.size() -1; i > -1; i--) {
+                        if (staticBlocks.get(i).y == y) {
+                            staticBlocks.remove(i);
+                        }
+                    }
+                    // Move all the static block above the deleted row
+                    for (Block b : staticBlocks) {
+                        if (b.y < y) {
+                            b.y += Block.SIZE;
+                        }
+                    }
+                }
+                x = left_x;
+                y += Block.SIZE;
+                blockCount = 0;
+            }
+        }
+    }
+
     public void update() {
 
         if (!KeyHandler.paused) {
@@ -91,6 +127,9 @@ public class PlayManager {
                 currentTetramino.setXY(TETRAMINO_START_X, TETRAMINO_START_Y);
                 nextTetramino = pickTetramino();
                 nextTetramino.setXY(NEXT_TETRAMINO_X, NEXT_TETRAMINO_Y);
+
+                // When a tetramino becames inactive, check if the row can be deleted
+                checkDelete();
 
             } else {
                 currentTetramino.update();

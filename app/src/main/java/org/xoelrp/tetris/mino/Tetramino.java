@@ -28,6 +28,8 @@ public class Tetramino {
         tempBlock[1] = new Block(color);
         tempBlock[2] = new Block(color);
         tempBlock[3] = new Block(color);
+
+        deactivating = false;
     }
     public void setXY(int x, int y) {}
     public void updateXY(int direction) {
