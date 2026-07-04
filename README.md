@@ -70,6 +70,8 @@ Si utilizas maven necesitas convertir el archivo gradle.build en pom.xml con alg
 
 ## ▶️ Uso
 
+### *Linux:*
+
 Para ejecutar el programa situate en la carpeta raiz del proyecto con:
 
 ```bash
@@ -83,8 +85,11 @@ gradle fatJar
 ```
 
 ```bash
-java -jar /app/build/libs/app-1.0-SNAPSHOT.jar
+java -jar /app/build/libs/app-1.0.jar
 ```
+
+### *Windows:*
+Puedes ejecutarlo siguiendo los mismos pasos que linux o con el ```exe``` en la carpeta ```dist```
 
 
 ---

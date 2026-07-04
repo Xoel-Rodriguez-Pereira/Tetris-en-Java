@@ -7,4 +7,3 @@ build
 # Ignore Kotlin plugin data
 .kotlin
 
-tetris-runtime
