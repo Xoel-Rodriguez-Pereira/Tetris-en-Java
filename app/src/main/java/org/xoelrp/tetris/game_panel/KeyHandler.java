@@ -17,7 +17,7 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_W || code == KeyEvent.VK_UP) {
             upKeyPress = true;
         }
-        if (code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN) {
+        if (code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN || code == KeyEvent.VK_SPACE) {
             downKeyPress = true;
         }
         if (code == KeyEvent.VK_A || code == KeyEvent.VK_LEFT) {
@@ -29,9 +29,9 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_R) {
             retry = true;
         }
-        if (code == KeyEvent.VK_SPACE && paused) {
+        if (code == KeyEvent.VK_ESCAPE && paused) {
             paused = false;
-        } else if (code == KeyEvent.VK_SPACE && !paused) {
+        } else if (code == KeyEvent.VK_ESCAPE && !paused) {
             paused = true;
         }
 
