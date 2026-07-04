@@ -38,7 +38,7 @@ public class PlayManager {
 
     // Other logic
     public static int dropInterval = 60;  
-    boolean gameOver;
+    public static boolean gameOver;
     private int score, level, lines;
 
     // Effects
@@ -169,6 +169,21 @@ public class PlayManager {
         }
     }
 
+    private void restart() {
+        staticBlocks.clear();
+        currentTetramino = pickTetramino();
+        currentTetramino.setXY(TETRAMINO_START_X, TETRAMINO_START_Y);
+        nextTetramino = pickTetramino();
+        nextTetramino.setXY(NEXT_TETRAMINO_X, NEXT_TETRAMINO_Y);
+        level = 0;
+        lines = 0;
+        score = 0;
+        GamePanel.music.play(4, true);
+        GamePanel.music.loop();
+        KeyHandler.retry = false;
+        gameOver = false;
+    }
+
     public void update() {
         
         if (!KeyHandler.paused) {
@@ -194,10 +209,13 @@ public class PlayManager {
             } else {
                 if (!gameOver) {
                     currentTetramino.update();
+                } else if (KeyHandler.retry) {
+                    restart();        
                 }
             }
-        } 
-    }
+        }
+    } 
+    
 
     public void draw(Graphics2D g2) {
         //Draw main play area

@@ -26,7 +26,7 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_D || code == KeyEvent.VK_RIGHT) {
             rightKeyPress = true;
         }
-        if (code == KeyEvent.VK_R) {
+        if (code == KeyEvent.VK_R && PlayManager.gameOver) {
             retry = true;
         }
         if (code == KeyEvent.VK_ESCAPE && paused) {
