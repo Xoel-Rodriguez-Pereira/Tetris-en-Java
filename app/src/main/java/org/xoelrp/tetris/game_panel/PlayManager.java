@@ -242,6 +242,18 @@ public class PlayManager {
         g2.drawString("Lines: " + lines, x+15, y+100);
         g2.drawString("Level: " + level, x+15, y+150);
 
+        //Draw controls
+        g2.setFont(new Font("Arial", Font.BOLD, 20));
+        g2.drawString("CONTROLS", x+15, y+200);
+        g2.setFont(new Font("Arial", Font.PLAIN, 10));
+        g2.drawString("Rotate: W / Up Arrow", x+15, y+225);
+        g2.drawString("Move Left: A / Left Arrow", x+15, y+250);
+        g2.drawString("Move Rigt: D / Right Arrow ", x+15, y+275);
+        g2.drawString("Move down: ", x+15, y+300);
+        g2.drawString("S / Down Arrow / Space", x+15, y+325);
+        g2.drawString("Pause: Esc", x+15, y+350);
+        g2.drawString("Mute music: M", x+15, y+375);
+
         // Draw currentTetramino
         if (currentTetramino != null) {
             currentTetramino.draw(g2);
