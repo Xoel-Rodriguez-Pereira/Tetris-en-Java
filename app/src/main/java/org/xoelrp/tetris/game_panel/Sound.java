@@ -19,6 +19,7 @@ public class Sound {
         url[1] = getClass().getResource("/rotateTetramino.wav");
         url[2] = getClass().getResource("/destroyLine.wav");
         url[3] = getClass().getResource("/gameOver.wav");
+        url[4] = getClass().getResource("/mainTheme.wav");
     }
 
     public void play(int i, boolean music) {
@@ -53,5 +54,12 @@ public class Sound {
     public void stop() {
         musicClip.stop();
         musicClip.close();
+    }
+    public void pause() {
+        musicClip.setFramePosition(musicClip.getFramePosition());
+        musicClip.stop();
+    }
+    public void reanude() {
+        musicClip.start();
     }
 }

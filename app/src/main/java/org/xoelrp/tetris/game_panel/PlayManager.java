@@ -163,6 +163,7 @@ public class PlayManager {
         for (Block b : staticBlocks) {
             if (b.x == TETRAMINO_START_X && b.y == TETRAMINO_START_Y) {
                 gameOver = true;
+                GamePanel.music.stop();
                 GamePanel.soundEffect.play(3, false);
             }
         }

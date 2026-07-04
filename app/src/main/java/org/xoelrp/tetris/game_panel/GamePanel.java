@@ -38,6 +38,8 @@ public class GamePanel extends JPanel implements Runnable {
         isRunning = true;
         gameThread = new Thread(this);
         gameThread.start(); // Ejecuta run() del GamePanel
+        music.play(4, true);
+        music.loop();
     }
 
     @Override
