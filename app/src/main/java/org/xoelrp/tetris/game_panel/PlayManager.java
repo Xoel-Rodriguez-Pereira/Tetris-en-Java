@@ -303,15 +303,27 @@ public class PlayManager {
             g2.setFont(new Font("NotoSANS", Font.BOLD | Font.ITALIC, 70));
             g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
             x = left_x + 45;
-            y = top_y + 300;
+            y = top_y + 280;
             
             // Dibujar sombra negra
             g2.setColor(Color.BLACK);
             g2.drawString("GAME OVER", x + 4, y + 4);
             
+            
             // Dibujar texto rojo
             g2.setColor(Color.RED);
             g2.drawString("GAME OVER", x, y);
+
+            // Dibujar restart
+            g2.setFont(new Font("NotoSANS", Font.PLAIN, 30));
+            g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+            x = left_x + 95;
+            y = top_y + 330;
+            g2.setColor(Color.BLACK);
+            g2.drawString("PRESS R TO RESTART", x + 4, y + 34);
+            g2.setColor(Color.WHITE);
+            g2.drawString("PRESS R TO RESTART", x, y+30);
+
         }
     }
 }
