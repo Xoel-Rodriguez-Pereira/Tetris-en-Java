@@ -55,11 +55,4 @@ public class Sound {
         musicClip.stop();
         musicClip.close();
     }
-    public void pause() {
-        musicClip.setFramePosition(musicClip.getFramePosition());
-        musicClip.stop();
-    }
-    public void reanude() {
-        musicClip.start();
-    }
 }
