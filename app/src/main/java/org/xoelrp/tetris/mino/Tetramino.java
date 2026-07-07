@@ -163,7 +163,6 @@ public class Tetramino {
                 case 4 -> getDirection1();
                 default -> throw new AssertionError();
             }
-            GamePanel.soundEffect.play(1, false);
             KeyHandler.upKeyPress = false;
         }
 

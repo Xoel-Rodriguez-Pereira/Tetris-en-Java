@@ -144,7 +144,14 @@ public class PlayManager {
             }
         }
         if (lineCount > 0) {
-            GamePanel.soundEffect.play(2, false);
+            switch (lineCount) {
+                case 1 -> GamePanel.soundEffect.play(2, false);
+                case 2 -> GamePanel.soundEffect.play(5, false);
+                case 3 -> GamePanel.soundEffect.play(6, false);
+                case 4 -> GamePanel.soundEffect.play(7, false);
+                default -> throw new AssertionError();
+            }
+            
             calculateScore(lineCount);
         }
     }

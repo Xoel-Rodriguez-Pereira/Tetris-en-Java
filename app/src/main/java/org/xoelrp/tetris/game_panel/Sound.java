@@ -17,9 +17,14 @@ public class Sound {
     public Sound() {
         url[0] = getClass().getResource("/placeTetramino.wav");
         url[1] = getClass().getResource("/rotateTetramino.wav");
-        url[2] = getClass().getResource("/destroyLine.wav");
         url[3] = getClass().getResource("/gameOver.wav");
         url[4] = getClass().getResource("/mainTheme.wav");
+        url[2] = getClass().getResource("/singleLine.wav");
+        url[5] = getClass().getResource("/doubleLine.wav");
+        url[6] = getClass().getResource("/tripleLine.wav");
+        url[7] = getClass().getResource("/tetris.wav");
+        url[8] = getClass().getResource("/pause.wav");
+        url[9] = getClass().getResource("/unpause.wav");
     }
 
     public void play(int i, boolean music) {

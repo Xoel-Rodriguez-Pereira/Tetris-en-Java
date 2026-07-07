@@ -2,6 +2,8 @@ package org.xoelrp.tetris.mino;
 
 import java.awt.Color;
 
+import org.xoelrp.tetris.game_panel.GamePanel;
+
 public class Hero extends Tetramino {
 
     public Hero() {
@@ -39,6 +41,7 @@ public class Hero extends Tetramino {
         tempBlock[3].x = block[0].x + 2*Block.SIZE;
         tempBlock[3].y = block[0].y;
 
+        GamePanel.soundEffect.play(1, false);
         updateXY(1);
     }
 
@@ -57,6 +60,7 @@ public class Hero extends Tetramino {
         tempBlock[3].x = block[0].x;
         tempBlock[3].y = block[0].y + 2*Block.SIZE;
 
+        GamePanel.soundEffect.play(1, false);
         updateXY(2);
     }
 

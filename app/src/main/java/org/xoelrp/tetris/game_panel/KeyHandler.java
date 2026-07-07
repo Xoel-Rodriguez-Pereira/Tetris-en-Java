@@ -30,8 +30,10 @@ public class KeyHandler implements KeyListener {
             retry = true;
         }
         if (code == KeyEvent.VK_ESCAPE && paused) {
+            GamePanel.soundEffect.play(9, false);
             paused = false;
         } else if (code == KeyEvent.VK_ESCAPE && !paused) {
+            GamePanel.soundEffect.play(8, false);
             paused = true;
         }
         if (code == KeyEvent.VK_M && mute) {

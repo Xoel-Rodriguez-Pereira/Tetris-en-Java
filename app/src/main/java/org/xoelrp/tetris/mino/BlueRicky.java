@@ -2,6 +2,8 @@ package org.xoelrp.tetris.mino;
 
 import java.awt.Color;
 
+import org.xoelrp.tetris.game_panel.GamePanel;
+
 public class BlueRicky extends Tetramino {
 
     public BlueRicky() {
@@ -37,6 +39,7 @@ public class BlueRicky extends Tetramino {
         tempBlock[3].x = block[0].x - Block.SIZE;
         tempBlock[3].y = block[0].y - Block.SIZE;
 
+        GamePanel.soundEffect.play(1, false);
         updateXY(1);
     }
 
@@ -54,6 +57,7 @@ public class BlueRicky extends Tetramino {
         tempBlock[3].x = block[0].x + Block.SIZE;
         tempBlock[3].y = block[0].y - Block.SIZE;
 
+        GamePanel.soundEffect.play(1, false);
         updateXY(2);
     }
 
@@ -71,6 +75,7 @@ public class BlueRicky extends Tetramino {
         tempBlock[3].x = block[0].x + Block.SIZE;
         tempBlock[3].y = block[0].y + Block.SIZE;
 
+        GamePanel.soundEffect.play(1, false);
         updateXY(3);
     }
 
@@ -88,6 +93,7 @@ public class BlueRicky extends Tetramino {
         tempBlock[3].x = block[0].x - Block.SIZE;
         tempBlock[3].y = block[0].y + Block.SIZE;
 
+        GamePanel.soundEffect.play(1, false);
         updateXY(4);
     }
 }
